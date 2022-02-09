@@ -14,6 +14,8 @@ jobs:
       (github.event_name == 'create' &&  ${{ contains(github.ref, 'refs/heads/production_release') }})
 
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.semver.outputs.matrix }}
     
     steps:
       - name: Checkout
@@ -29,9 +31,9 @@ jobs:
           chmod +x ./.github/intall-py-dependecies.sh
           ./.github/intall-py-dependecies.sh
           
-      - name: Run Computer Version Script
+      - name: Recomputer Version on Develop and Master
         id: semver
-        run:  echo "::set-output name=matrix::$(python ./.github/hotfix_release.py $GITHUB_REF)"
+        run:  echo "::set-output name=matrix::$(python ./.github/hotfix_release.py)"
           
   update-yaml:
     needs: calculate-version
