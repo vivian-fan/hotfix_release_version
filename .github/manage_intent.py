@@ -25,7 +25,7 @@ def get_intents(path):
         intent_mgmt_content = yaml.safe_load(intent_mgmt_file)
     return intent_mgmt_content
 
-def push_to_origin(intent_mgmt_content, target_path):
+def push_to_origin(intent_mgmt_content, target_path, target_branch):
     with open(target_path + '/.github/intent.yml', 'w') as intent_mgmt_file:
         intent_mgmt_file.seek(0)
         intent_mgmt_file.write( yaml.dump(intent_mgmt_content, default_flow_style=False))
@@ -81,7 +81,7 @@ for file in released_intents['intent']:
             if intent_dic in master_intents['intent'][file]:
                 master_intents['intent'][file].remove(intent_dic)
                 
-push_to_origin(master_intents, master_path)
+push_to_origin(master_intents, master_path, 'master')
 
 # Delete released_intents from dev_intents
 for file in released_intents['intent']:
@@ -90,7 +90,7 @@ for file in released_intents['intent']:
             if intent_dic in dev_intents['intent'][file]:
                 dev_intents['intent'][file].remove(intent_dic)
 
-push_to_origin(dev_intents, dev_path)
+push_to_origin(dev_intents, dev_path, 'develop')
 
 print(
     "After: ",
