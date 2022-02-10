@@ -59,7 +59,7 @@ released_intents = get_intents(release_path)
 
 # Delete released_intents from master_intents
 for file in released_intents['intent']:
-    for intent_dic in released_intents['intent'][file].items():
+    for intent_dic in released_intents['intent'][file]:
         if intent_dic in master_intents[file]:
             master_intents[file].remove(intent_dic)
         
@@ -67,7 +67,7 @@ for file in released_intents['intent']:
 
 # Delete released_intents from dev_intents
 for file in released_intents['intent']:
-    for intent_dic in released_intents['intent'][file].items():
+    for intent_dic in released_intents['intent'][file]:
         if intent_dic in dev_intents[file]:
             dev_intents[file].remove(intent_dic)
 
