@@ -67,7 +67,7 @@ for file in released_intents['intent']:
     if file in master_intents['intent']:
         for intent_dic in released_intents['intent'][file]:
             print('debug', intent_dic)
-            if intent_dic in master_intents[file]:
+            if intent_dic in master_intents['intent'][file]:
                 master_intents['intent'][file].remove(intent_dic)
         
     
@@ -76,7 +76,7 @@ for file in released_intents['intent']:
 for file in released_intents['intent']:
     if file in dev_intents['intent']:
         for intent_dic in released_intents['intent'][file]:
-            if intent_dic in dev_intents[file]:
+            if intent_dic in dev_intents[['intent']file]:
                 dev_intents['intent'][file].remove(intent_dic)
 
 print(
