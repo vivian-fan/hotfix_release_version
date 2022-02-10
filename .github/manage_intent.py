@@ -25,7 +25,7 @@ def get_intents(path):
         intent_mgmt_content = yaml.safe_load(intent_mgmt_file)
     return intent_mgmt_content
 
-def push_to_origin(intent_mgmt_file, target_path):
+def push_to_origin(intent_mgmt_content, target_path):
     with open(target_path + '/.github/intent.yml', 'w') as intent_mgmt_file:
         intent_mgmt_file.seek(0)
         intent_mgmt_file.write( yaml.dump(intent_mgmt_content, default_flow_style=False))
