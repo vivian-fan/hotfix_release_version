@@ -25,6 +25,18 @@ def get_intents(path):
         intent_mgmt_content = yaml.safe_load(intent_mgmt_file)
     return intent_mgmt_content
 
+def push_to_origin(intent_mgmt_file, target_path):
+    with open(target_path + '/.github/intent.yml', 'w') as intent_mgmt_file:
+        intent_mgmt_file.seek(0)
+        intent_mgmt_file.write( yaml.dump(intent_mgmt_content, default_flow_style=False))
+    try:
+        repo = git.Repo(target_path)
+        repo.git.add(update=True)
+        repo.index.commit('add intent to ' + target_branch)
+        repo.git.push("origin", target_branch)
+    except Exception as e:
+        print('Errors occured while pushing the code', e) 
+
 remote = get_remote()
 # Clone master branch
 # Read intent_list from /.github/intent.yml as master_intents
@@ -66,18 +78,19 @@ print(
 for file in released_intents['intent']:
     if file in master_intents['intent']:
         for intent_dic in released_intents['intent'][file]:
-            print('debug', intent_dic)
             if intent_dic in master_intents['intent'][file]:
                 master_intents['intent'][file].remove(intent_dic)
-        
-    
+                
+push_to_origin(master_intents, master_path)
 
 # Delete released_intents from dev_intents
 for file in released_intents['intent']:
     if file in dev_intents['intent']:
         for intent_dic in released_intents['intent'][file]:
-            if intent_dic in dev_intents[['intent']file]:
+            if intent_dic in dev_intents['intent'][file]:
                 dev_intents['intent'][file].remove(intent_dic)
+
+push_to_origin(dev_intents, dev_path)
 
 print(
     "After: ",
