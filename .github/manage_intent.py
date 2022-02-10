@@ -17,7 +17,7 @@ def get_clone_repo(remote, path, branch):
     if os.path.exists(path):
         shutil.rmtree(path)
     os.mkdir(path)
-    clone_repo = git.Repo.clone_from(remote, path, branch)
+    clone_repo = git.Repo.clone_from(remote, path, branch=branch)
     return clone_repo
 
 def get_intents(path):
