@@ -32,7 +32,9 @@ jobs:
           ./.github/intall-py-dependecies.sh
 
       - name: Manage Intent File
-        run: python ./.github/manage_intent.py
+        env:
+              USER_PASSWORD: ${{ secrets.TOKEN }}
+        run: python ./.github/manage_intent.py $USER_PASSWORD
 
       - name: Recomputer Version on Develop and Master
         id: semver
