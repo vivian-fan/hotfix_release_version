@@ -57,20 +57,29 @@ latest_release_branch = release_branches[-1].replace("origin/", "")
 clone_repo_release = get_clone_repo(remote, release_path, latest_release_branch)
 released_intents = get_intents(release_path)
 
+print(
+    "Before: ",
+    "master:", master_intents, "develop:", dev_intents, "released: ", released_intents
+)
+
 # Delete released_intents from master_intents
 for file in released_intents['intent']:
-    for intent_dic in released_intents['intent'][file]:
-        if intent_dic in master_intents[file]:
-            master_intents[file].remove(intent_dic)
+    if file in master_intents['intent']:
+        for intent_dic in released_intents['intent'][file]:
+            print('debug', intent_dic)
+            if intent_dic in master_intents[file]:
+                master_intents['intent'][file].remove(intent_dic)
         
     
 
 # Delete released_intents from dev_intents
 for file in released_intents['intent']:
-    for intent_dic in released_intents['intent'][file]:
-        if intent_dic in dev_intents[file]:
-            dev_intents[file].remove(intent_dic)
+    if file in dev_intents['intent']:
+        for intent_dic in released_intents['intent'][file]:
+            if intent_dic in dev_intents[file]:
+                dev_intents['intent'][file].remove(intent_dic)
 
 print(
+    "After: ",
     "master:", master_intents, "develop:", dev_intents, "released: ", released_intents
 )
