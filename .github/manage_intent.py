@@ -21,7 +21,7 @@ def get_clone_repo(remote, path, branch):
     return clone_repo
 
 def get_intents(path):
-    with open(target_path + "/.github/intent.yml", "r") as intent_mgmt_file:
+    with open(path + "/.github/intent.yml", "r") as intent_mgmt_file:
         intent_mgmt_content = yaml.safe_load(intent_mgmt_file)
     return intent_mgmt_content
 
