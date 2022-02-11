@@ -34,7 +34,7 @@ jobs:
       - name: Manage Intent File
         env:
               USER_PASSWORD: ${{ secrets.TOKEN }}
-        run: python ./.github/manage_intent.py $USER_PASSWORD
+        run: python ./.github/manage_intent.py $USER_PASSWORD $GITHUB_EVENT_NAME
 
       - name: Recomputer Version on Develop and Master
         id: semver
