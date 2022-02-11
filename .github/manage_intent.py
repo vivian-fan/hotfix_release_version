@@ -24,6 +24,11 @@ def get_intents(path):
         intent_mgmt_content = yaml.safe_load(intent_mgmt_file)
     return intent_mgmt_content
 
+def get_intent(path):
+     with open(path + "/intent.yml", "r") as intent_file:
+        intent_content = yaml.safe_load(intent_file)
+    return intent_content
+
 def push_to_origin(intent_mgmt_content, target_path, target_branch):
     with open(target_path + '/.github/intent.yml', 'w') as intent_mgmt_file:
         intent_mgmt_file.seek(0)
