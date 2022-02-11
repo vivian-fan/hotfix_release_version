@@ -96,7 +96,9 @@ if event == "pull_request":
     hotfix_path = "./hotfix"
     clone_repo_hotfix = get_clone_repo(remote, hotfix_path, hotfix_branch)
     hotfix_intent = get_intent(hotfix_path)
+    print('hotfix_intent: ', hotfix_intent)
     for file in hotfix_intent["intent"]:
+        print('interate: ', hotfix_intent["intent"][file])
         released_intents["intent"][file].append(
             {"id": hotfix_branch, "intent": hotfix_intent["intent"][file]}
         )
