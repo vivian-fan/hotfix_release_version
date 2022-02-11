@@ -91,17 +91,12 @@ print(
 
 # If the event is PR merge, add hotfix to release
 event = sys.argv[2]
-print('event is ', event)
 if event == "pull_request":
-    print('pull_request triggered')
     hotfix_branch = sys.argv[3]
-    print('branch name: ', hotfix_branch)
     hotfix_path = "./hotfix"
     clone_repo_hotfix = get_clone_repo(remote, hotfix_path, hotfix_branch)
     hotfix_intent = get_intent(hotfix_path)
-    print('hotfix_intent: ', hotfix_intent)
     for file in hotfix_intent["intent"]:
-        print('interate: ', hotfix_intent["intent"][file])
         released_intents["intent"][file].append(
             {"id": hotfix_branch, "intent": hotfix_intent["intent"][file]}
         )
