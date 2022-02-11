@@ -81,7 +81,7 @@ if event == 'pull_request':
     clone_repo_hotfix = get_clone_repo(remote, hotfix_path, hotfix_branch)
     hotfix_intent = get_intent(hotfix_path)
     for file in hotfix_intent['intent']:
-        released_intents['intent'][file].append({'id': hotfix_branch, 'intent': hotfix_intent['intent'][file]}))
+        released_intents['intent'][file].append({'id': hotfix_branch, 'intent': hotfix_intent['intent'][file]})
 
 # # Delete released_intents from master_intents
 # for file in released_intents['intent']:
