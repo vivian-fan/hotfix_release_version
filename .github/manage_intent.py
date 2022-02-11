@@ -92,6 +92,7 @@ print(
 # If the event is PR merge, add hotfix to release
 event = sys.argv[2]
 if event == "pull_request":
+    print('pull request triggered')
     hotfix_branch = sys.argv[3]
     hotfix_path = "./hotfix"
     clone_repo_hotfix = get_clone_repo(remote, hotfix_path, hotfix_branch)
@@ -115,7 +116,10 @@ for file in released_intents['intent']:
     if file in dev_intents['intent']:
         for intent_dic in released_intents['intent'][file]:
             if intent_dic in dev_intents['intent'][file]:
+                print('debug iterate, ', intent_dic, ' will be removed')
                 dev_intents['intent'][file].remove(intent_dic)
+                
+print('debug', dev_intents)
 
 push_to_origin(dev_intents, dev_path, 'develop')
 
