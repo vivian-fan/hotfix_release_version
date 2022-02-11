@@ -12,7 +12,6 @@ def get_remote():
     remote = f"https://{username}:{password}@github.com/vivian-fan/hotfix_release_version.git"
     return remote
 
-
 def get_clone_repo(remote, path, branch):
     if os.path.exists(path):
         shutil.rmtree(path)
@@ -89,8 +88,14 @@ for file in released_intents['intent']:
         for intent_dic in released_intents['intent'][file]:
             if intent_dic in dev_intents['intent'][file]:
                 dev_intents['intent'][file].remove(intent_dic)
-
+                
 push_to_origin(dev_intents, dev_path, 'develop')
+                
+# Delete released_intents from dev_intents
+for file in released_intents['intent']:
+    released_intents['intent'][file] = []
+    
+push_to_origin(released_intents, release_path, latest_release_branch)
 
 print(
     "After: ",
