@@ -101,29 +101,29 @@ if event == "pull_request":
             {"id": hotfix_branch, "intent": hotfix_intent["intent"][file]}
         )
 
-# # Delete released_intents from master_intents
-# for file in released_intents['intent']:
-#     if file in master_intents['intent']:
-#         for intent_dic in released_intents['intent'][file]:
-#             if intent_dic in master_intents['intent'][file]:
-#                 master_intents['intent'][file].remove(intent_dic)
+# Delete released_intents from master_intents
+for file in released_intents['intent']:
+    if file in master_intents['intent']:
+        for intent_dic in released_intents['intent'][file]:
+            if intent_dic in master_intents['intent'][file]:
+                master_intents['intent'][file].remove(intent_dic)
 
-# push_to_origin(master_intents, master_path, 'master')
+push_to_origin(master_intents, master_path, 'master')
 
-# # Delete released_intents from dev_intents
-# for file in released_intents['intent']:
-#     if file in dev_intents['intent']:
-#         for intent_dic in released_intents['intent'][file]:
-#             if intent_dic in dev_intents['intent'][file]:
-#                 dev_intents['intent'][file].remove(intent_dic)
+# Delete released_intents from dev_intents
+for file in released_intents['intent']:
+    if file in dev_intents['intent']:
+        for intent_dic in released_intents['intent'][file]:
+            if intent_dic in dev_intents['intent'][file]:
+                dev_intents['intent'][file].remove(intent_dic)
 
-# push_to_origin(dev_intents, dev_path, 'develop')
+push_to_origin(dev_intents, dev_path, 'develop')
 
-# # Delete released_intents from dev_intents
-# for file in released_intents['intent']:
-#     released_intents['intent'][file] = []
+# Delete released_intents from dev_intents
+for file in released_intents['intent']:
+    released_intents['intent'][file] = []
 
-# push_to_origin(released_intents, release_path, latest_release_branch)
+push_to_origin(released_intents, release_path, latest_release_branch)
 
 print(
     "After: ",
