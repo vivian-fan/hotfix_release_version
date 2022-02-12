@@ -31,6 +31,7 @@ def get_intents(path):
 
 
 def get_version_from_branch(path, file):
+    file += '.yml'
     with open(path + "/" + file, "r") as spec_file:
         spec_content = yaml.safe_load(spec_file)
     return spec_content["info"]["version"]
