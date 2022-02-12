@@ -80,7 +80,7 @@ def combine_intent(master_intents):
     intent_dic = {}
     for file in master_intents["intent"]:
         if len(master_intents["intent"][file]) != 0:
-            intent = minor
+            intent = "minor"
             for intent_item in master_intents["intent"][file]:
                 if intent_item["intent"] == "major":
                     intent = "major"
