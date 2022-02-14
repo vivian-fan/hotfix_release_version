@@ -10,8 +10,8 @@ on:
 jobs:
   calculate-version:
     if: |
-      github.event_name == 'pull_request' ||
-      (github.event_name == 'create' &&  ${{ contains(github.ref, 'refs/heads/production_release') }})
+      ${{ github.event_name == 'pull_request' ||
+      (github.event_name == 'create' &&  ${{ contains(github.ref, 'refs/heads/production_release') }}) }}
 
     runs-on: ubuntu-latest
     outputs:
@@ -33,13 +33,13 @@ jobs:
 
       - name: Manage Intent File
         env:
-              USER_PASSWORD: ${{ secrets.TOKEN }}
+          USER_PASSWORD: ${{ secrets.TOKEN }}
         run: python ./.github/manage_intent.py $USER_PASSWORD $GITHUB_EVENT_NAME $GITHUB_HEAD_REF
 
       - name: Recomputer Version on Develop and Master
         id: semver
         env:
-              USER_PASSWORD: ${{ secrets.TOKEN }}
+          USER_PASSWORD: ${{ secrets.TOKEN }}
         run: |
           python ./.github/hotfix_release.py $USER_PASSWORD
           echo "::set-output name=matrix::$(python ./.github/hotfix_release.py $USER_PASSWORD)"
