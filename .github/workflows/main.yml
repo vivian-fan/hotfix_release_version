@@ -40,7 +40,8 @@ jobs:
         id: semver
         env:
               USER_PASSWORD: ${{ secrets.TOKEN }}
-        run: 
+        run: |
+          python ./.github/hotfix_release.py $USER_PASSWORD
           echo "::set-output name=matrix::$(python ./.github/hotfix_release.py $USER_PASSWORD)"
 
 #   update-yaml:
